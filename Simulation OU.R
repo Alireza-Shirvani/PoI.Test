@@ -1,3 +1,4 @@
+###############The R code for the Ornstein–Uhlenbeck process
 #chooseCRANmirror(47)
 #install.packages("doParallel")
 #install.packages("foreach")
@@ -11,6 +12,7 @@ registerDoParallel(40)
 samplesize           <- c(100,500,1000)
 gridpoints           <- c(1000)
 quantiles            <- c(0.05)
+##### For example the setting for b=2.1 and d=10 denoted by "Easy2.110"
 DGP <- c("No PoI2.1","Easy2.110","Easy2.140","Easy2.160")
 a           <- 0
 b           <- 1
@@ -57,8 +59,9 @@ for(p in gridpoints){
           
   rej_h0_list<-foreach(l= 1:B)%dopar%{  
  
-
+###################################################
  ### beta is the slope function evaluated at t
+######################################################
 f <- function(x){
 10*x*(tan(x))^(-1)-x^2+25
 }
@@ -71,7 +74,14 @@ sqrt((50)/(35+ttt^2))*sin(ttt*t))
 }
 return(l)
 }
-
+################################################################## 
+This setPoIDGP function is for 4 PoIs cases when b=2.1. For 2 PoIs cases let:
+  ##       tau      <- c(0.333, 0.666) # PoI-locations tau_j
+    ##    beta_tau <- (10/sqrt(N))*c(-6,5) # PoI-parameters
+####### and for 1 PoI cases let:
+  ##       tau      <- c(0.333) # PoI-locations tau_j
+    ##    beta_tau <- (10/sqrt(N))*c(4) # PoI-parameters
+##################################################################
 
 setPoIDGP <-
 function(DGP_name){
@@ -109,7 +119,9 @@ else {
     
     list(tau = tau, beta_tau = beta_tau, fct_text=fct_text)
   }
-
+#################################################################
+#####Simulate X from the Ornstein–Uhlenbeck process
+############################################################
 
 OU.SIM  <- function(a, b, p, N, theta=5, sigmaou=3.5){
   dt <- (b-a)/(p-1)
