@@ -1,7 +1,7 @@
 #install.packages("readxl")
  library(readxl)
- X1 <- read_excel("D:/paper/My real data/WEATHER IRAN/Final data/Temperature.xls")
- Y1 <- read_excel("D:/paper/My real data/WEATHER IRAN/Final data/Humidity.xls")
+ X1 <- read_excel("D:/Temperature.xls")
+ Y1 <- read_excel("D:/Humidity.xls")
 X1 <- X1[,-c(1,2)]
 X1 <- as.matrix(X1)
 X1 <- as.numeric(X1)
