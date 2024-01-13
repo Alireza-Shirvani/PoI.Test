@@ -101,4 +101,4 @@ denominator <- t(Y_hat-Y)%*%(Y_hat-Y)
 T <- numerator/denominator 
 H <- T-qgamma(1-(alpha), (S_hat)/2, 0.5, lower.tail = TRUE, log.p = FALSE)
 print(H)
-
+prediction_error <- denominator 
